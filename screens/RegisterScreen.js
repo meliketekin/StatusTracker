@@ -1,12 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import React from "react";
+import { CustomHeader } from "../components/CustomHeader";
 
 export default function RegisterScreen() {
   return (
-    <View>
-      <Text>RegisterScreen</Text>
-    </View>
-  )
+    <SafeAreaView style={styles.container}>
+     <CustomHeader text="Sign Up" hasGoBack={true}/>
+    </SafeAreaView>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+});
