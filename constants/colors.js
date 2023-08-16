@@ -1,3 +1,2 @@
-export const Colors = {
-    
+export const colors = {
 }
