@@ -3,17 +3,12 @@ import {
   Text,
   View,
   SafeAreaView,
-  Keyboard,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
 import { CustomHeader } from "../components/CustomHeader";
 import { CustomTextInput } from "../components/CustomTextInput";
 import { Feather } from "@expo/vector-icons";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
-import { COLORS } from "../constants/colors";
-import { ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function RegisterScreen({ navigation }) {
@@ -26,9 +21,9 @@ export default function RegisterScreen({ navigation }) {
       <CustomHeader
         text="Sign Up"
         hasGoBack={true}
-        onPress={() => navigation.goBack()}
+        onPress={navigation.goBack}
       />
-      <KeyboardAwareScrollView enableAutomaticScroll>
+      <KeyboardAwareScrollView >
         <View style={styles.helloContainer}>
           <Text style={styles.helloText}>Hello There 🖐</Text>
           <Text style={styles.createText}>Create an account</Text>
