@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     height: 50,
     justifyContent: "center",
+    marginTop:30
   },
   title: {
     fontFamily: "Poppins-SemiBold",

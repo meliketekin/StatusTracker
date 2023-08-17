@@ -1,8 +1,8 @@
 import { StyleSheet, ImageBackground, View, Text } from "react-native";
 import React from "react";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
-import { colors } from "../constants/colors";
-import { dimensions } from "../constants/dimensions";
+import { COLORS } from "../constants/colors";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../constants/dimensions";
 
 export default function OnboardingScreen({ navigation }) {
   return (
@@ -21,12 +21,12 @@ export default function OnboardingScreen({ navigation }) {
         <View style={styles.authButtons}>
           <CustomTouchableOpacity
             text="Login"
-            backgroundColor={colors.red}
+            backgroundColor={COLORS.red}
             onPress={() => navigation.navigate("LoginScreen")}
           />
           <CustomTouchableOpacity
             text="Sign Up"
-            backgroundColor={colors.blue}
+            backgroundColor={COLORS.blue}
             onPress={() => navigation.navigate("RegisterScreen")}
 
           />
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   onboardingImage: {
-    height: dimensions.height * 0.77,
+    height: SCREEN_HEIGHT * 0.77,
   },
   bottomSheet: {
     backgroundColor: "#F6F6F6",
     position: "absolute",
-    top: dimensions.height / 2,
-    width: dimensions.width,
-    height: dimensions.height / 2,
+    top: SCREEN_HEIGHT / 2,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT / 2,
     borderRadius: 25,
     alignItems: "center",
     paddingHorizontal: 30,

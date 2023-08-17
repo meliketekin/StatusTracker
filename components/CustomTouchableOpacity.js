@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
-import { dimensions } from "../constants/dimensions";
+import { SCREEN_WIDTH } from "../constants/dimensions";
 
 export const CustomTouchableOpacity = (props) => {
   return (
@@ -14,7 +14,7 @@ export const CustomTouchableOpacity = (props) => {
 };
 const styles = StyleSheet.create({
   button: {
-    width: dimensions.width - 60,
+    width: SCREEN_WIDTH - 60,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 20,
