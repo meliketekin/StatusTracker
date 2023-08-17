@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }) {
         </View>
         <CustomTouchableOpacity
           text="Login"
-          onPress={() => navigation.navigate("LoginScreen")}
+          onPress={() => navigation.navigate("ApplicantsScreen")}
           containerStyle={{ alignSelf: "center" }}
         />
       </KeyboardAwareScrollView>
