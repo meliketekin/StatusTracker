@@ -21,13 +21,12 @@ export default function OnboardingScreen({ navigation }) {
         <View style={styles.authButtons}>
           <CustomTouchableOpacity
             text="Login"
-            backgroundColor={COLORS.red}
             onPress={() => navigation.navigate("LoginScreen")}
           />
           <CustomTouchableOpacity
             text="Sign Up"
-            backgroundColor={COLORS.blue}
             onPress={() => navigation.navigate("RegisterScreen")}
+            containerStyle={{backgroundColor: COLORS.blue}}
 
           />
         </View>

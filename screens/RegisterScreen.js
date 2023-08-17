@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Keyboard,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
 import { CustomHeader } from "../components/CustomHeader";
@@ -12,6 +13,8 @@ import { CustomTextInput } from "../components/CustomTextInput";
 import { Feather } from "@expo/vector-icons";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
 import { COLORS } from "../constants/colors";
+import { ScrollView } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function RegisterScreen({ navigation }) {
   const [fullName, setFullName] = useState("");
@@ -19,47 +22,50 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [securePassword, setSecurePassword] = useState(false);
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <SafeAreaView style={styles.container}>
-        <CustomHeader
-          text="Sign Up"
-          hasGoBack={true}
-          onPress={() => navigation.goBack()}
-        />
-        <View style={styles.bodyContainer}>
-          <View style={styles.helloContainer}>
-            <Text style={styles.helloText}>Hello There 🖐</Text>
-            <Text style={styles.createText}>Create an account</Text>
-          </View>
-          <View style={styles.textInputContainer}>
-            <CustomTextInput
-              placeholder="Full Name"
-              value={fullName}
-              onChangeText={setFullName}
-            />
-            <CustomTextInput
-              placeholder="Email Address"
-              value={email}
-              onChangeText={setEmail}
-            />
-            <CustomTextInput
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              renderRightIcon={
-                <Feather
-                  name={securePassword ? "eye-off" : "eye"}
-                  size={24}
-                  color="#28282866"
-                />
-              }
-              onPressRightIcon={() => setSecurePassword(!securePassword)}
-              secureTextEntry={securePassword}
-            />
-          </View>
+    <SafeAreaView style={styles.container}>
+      <CustomHeader
+        text="Sign Up"
+        hasGoBack={true}
+        onPress={() => navigation.goBack()}
+      />
+      <KeyboardAwareScrollView enableAutomaticScroll>
+        <View style={styles.helloContainer}>
+          <Text style={styles.helloText}>Hello There 🖐</Text>
+          <Text style={styles.createText}>Create an account</Text>
         </View>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+        <View style={styles.textInputContainer}>
+          <CustomTextInput
+            placeholder="Full Name"
+            value={fullName}
+            onChangeText={setFullName}
+          />
+          <CustomTextInput
+            placeholder="Email Address"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <CustomTextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            renderRightIcon={
+              <Feather
+                name={securePassword ? "eye-off" : "eye"}
+                size={24}
+                color="#28282866"
+              />
+            }
+            onPressRightIcon={() => setSecurePassword(!securePassword)}
+            secureTextEntry={securePassword}
+          />
+        </View>
+        <CustomTouchableOpacity
+          text="Sign Up"
+          onPress={() => navigation.navigate("LoginScreen")}
+          containerStyle={{ alignSelf: "center" }}
+        />
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -67,8 +73,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   helloContainer: {
-    marginTop: "20%",
+    marginTop: "25%",
     paddingHorizontal: 30,
   },
   helloText: {
@@ -84,7 +91,8 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     paddingHorizontal: 23,
-    marginTop: 50,
+    marginTop: 70,
     gap: 25,
+    marginBottom: 120,
   },
 });

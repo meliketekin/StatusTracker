@@ -107,6 +107,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   input: {
+    fontFamily: "PlusJakartaSans-SemiBold",
+    fontSize:14,
+    color:"#272A48",
     padding: 30,
     paddingLeft: 18,
     paddingTop: 25,
