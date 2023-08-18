@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   View,
   TextInput,
@@ -7,13 +7,19 @@ import {
   Easing,
   TouchableOpacity,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 
 export const CustomTextInput = (props) => {
   const transY = useRef(new Animated.Value(0));
   const transX = useRef(new Animated.Value(0));
   const scale = useRef(new Animated.Value(1));
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    const isDropDown = props.isFocused && props.value.length > 0;
+    if (isDropDown || isFocused) {
+      handleFocus();
+    }
+  }, [props.isFocused, props.value, isFocused]);
 
   const handleFocus = () => {
     Animated.parallel([
@@ -39,6 +45,7 @@ export const CustomTextInput = (props) => {
   };
 
   const handleBlur = () => {
+    setIsFocused(false);
     if (props.value.length > 0) return;
     Animated.parallel([
       Animated.timing(transY.current, {
@@ -62,7 +69,7 @@ export const CustomTextInput = (props) => {
     ]).start();
   };
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, props.containerStyle]}>
       <Animated.View
         style={[
           styles.labelContainer,
@@ -81,15 +88,19 @@ export const CustomTextInput = (props) => {
         </Animated.Text>
       </Animated.View>
       <TextInput
+        value={props.value}
         style={styles.input}
-        onFocus={handleFocus}
+        onFocus={() =>  setIsFocused(true)}
         onBlur={handleBlur}
         onChangeText={props.onChangeText}
         secureTextEntry={props.secureTextEntry}
+        editable={props.isEditable}
       />
       {props.renderRightIcon && (
-        <TouchableOpacity style={styles.eyeIcon} onPress={props.onPressRightIcon}>
-          {/* <Ionicons name="eye-outline" size={24} color="#28282866" /> */}
+        <TouchableOpacity
+          style={styles.eyeIcon}
+          onPress={props.onPressRightIcon}
+        >
           {props.renderRightIcon}
         </TouchableOpacity>
       )}
@@ -108,8 +119,8 @@ const styles = StyleSheet.create({
   },
   input: {
     fontFamily: "PlusJakartaSans-SemiBold",
-    fontSize:14,
-    color:"#272A48",
+    fontSize: 14,
+    color: "#272A48",
     padding: 30,
     paddingLeft: 18,
     paddingTop: 25,
