@@ -1,24 +1,36 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CustomHeader } from "../components/CustomHeader";
 import { CustomTextInput } from "../components/CustomTextInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Feather } from "@expo/vector-icons";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
-import { AuthService } from "../assets/service/auth";
+import { AuthService } from "../infrastructure/service/auth";
+import * as SecureStore from "expo-secure-store";
+import { AuthContext } from "../infrastructure/context/authcontext";
 
 export default function LoginScreen({ navigation }) {
+  const { setIsLoggedIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [securePassword, setSecurePassword] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     AuthService.Login(email, password)
       .then((res) => res.json())
       .then((json) => {
         console.error(json);
-        if(json.response.loginData) {
-          navigation.navigate("BottomTabs");
+        if (json.response.loginData) {
+          SecureStore.setItemAsync(
+            "email",
+            JSON.stringify(email)
+          );
+          SecureStore.setItemAsync(
+            "password",
+            JSON.stringify(password)
+          );
+          setIsLoggedIn(true)
+          // navigation.navigate("BottomTabs");
         }
       });
   };

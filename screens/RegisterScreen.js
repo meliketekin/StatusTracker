@@ -5,7 +5,7 @@ import { CustomTextInput } from "../components/CustomTextInput";
 import { Feather } from "@expo/vector-icons";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { AuthService } from "../assets/service/auth";
+import { AuthService } from "../infrastructure/service/auth";
 
 export default function RegisterScreen({ navigation }) {
   const [fullName, setFullName] = useState("");

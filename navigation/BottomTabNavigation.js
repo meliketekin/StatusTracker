@@ -3,10 +3,13 @@ import ApplicantsScreen from "../screens/ApplicantsScreen";
 import LogoutScreen from "../screens/LogoutScreen";
 import { Image, View } from "react-native";
 import EditUserScreen from "../screens/EditUserScreen";
-import { Feather } from '@expo/vector-icons';
+import { Feather } from "@expo/vector-icons";
+import { useContext } from "react";
+import { AuthContext } from "../infrastructure/context/authcontext";
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigation() {
+  const { logOut } = useContext(AuthContext);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -81,7 +84,7 @@ export default function BottomTabNavigation() {
                   shadowOpacity: 0.1,
                   shadowRadius: 4.65,
                   elevation: 6,
-                  padding:10
+                  padding: 10,
                 }}
               >
                 <Feather name="plus" size={60} color="#FF6464" />
@@ -102,6 +105,15 @@ export default function BottomTabNavigation() {
             color: "#FF6464",
           },
         }}
+        listeners={({ navigation, route }) => ({
+          focus: (e) => {
+            console.warn("selam");
+            // e.preventDefault();
+            logOut();
+
+            // navigation.navigate("Aut, {screen: "LoginScreen"})
+          },
+        })}
       />
     </Tab.Navigator>
   );

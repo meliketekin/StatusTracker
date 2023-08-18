@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { RootStackNavigation } from "./navigation/RootStackNavigation";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import AuthProvider from "./infrastructure/context/authcontext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,12 +22,14 @@ export default function App() {
   }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <BottomSheetModalProvider>
-        <RootStackNavigation />
-        <StatusBar style="auto" />
-      </BottomSheetModalProvider>
-    </GestureHandlerRootView>
+    <AuthProvider>
+      <GestureHandlerRootView style={styles.container}>
+        <BottomSheetModalProvider>
+          <RootStackNavigation />
+          <StatusBar style="auto" />
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </AuthProvider>
   );
 }
 
