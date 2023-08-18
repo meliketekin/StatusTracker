@@ -5,17 +5,32 @@ import { CustomTextInput } from "../components/CustomTextInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Feather } from "@expo/vector-icons";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
+import { AuthService } from "../assets/service/auth";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [securePassword, setSecurePassword] = useState(false);
 
+  const handleLogin = () => {
+    AuthService.Login(email, password)
+      .then((res) => res.json())
+      .then((json) => {
+        console.error(json);
+        if(json.response.loginData) {
+          navigation.navigate("BottomTabs");
+        }
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader text="Login" hasGoBack={true} onPress={navigation.goBack} />
       <KeyboardAwareScrollView>
-        <Image source={require("../assets/images/loginLogo.png")} style={styles.logo} />
+        <Image
+          source={require("../assets/images/loginLogo.png")}
+          style={styles.logo}
+        />
 
         <View style={styles.helloContainer}>
           <Text style={styles.helloText}>Hello There 🖐</Text>
@@ -44,7 +59,7 @@ export default function LoginScreen({ navigation }) {
         </View>
         <CustomTouchableOpacity
           text="Login"
-          onPress={() => navigation.navigate("BottomTabs")}
+          onPress={handleLogin}
           containerStyle={{ alignSelf: "center" }}
         />
       </KeyboardAwareScrollView>
@@ -57,9 +72,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    alignSelf:"center",
-    marginTop:30,
-    marginBottom:100
+    alignSelf: "center",
+    marginTop: 30,
+    marginBottom: 100,
   },
   helloContainer: {
     paddingHorizontal: 30,

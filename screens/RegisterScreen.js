@@ -1,21 +1,22 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-} from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import React, { useEffect, useState } from "react";
 import { CustomHeader } from "../components/CustomHeader";
 import { CustomTextInput } from "../components/CustomTextInput";
 import { Feather } from "@expo/vector-icons";
 import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { AuthService } from "../assets/service/auth";
 
 export default function RegisterScreen({ navigation }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [securePassword, setSecurePassword] = useState(false);
+
+  const handleSignup = () => {
+    AuthService.Register(fullName, email, password);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader
@@ -23,7 +24,7 @@ export default function RegisterScreen({ navigation }) {
         hasGoBack={true}
         onPress={navigation.goBack}
       />
-      <KeyboardAwareScrollView >
+      <KeyboardAwareScrollView>
         <View style={styles.helloContainer}>
           <Text style={styles.helloText}>Hello There 🖐</Text>
           <Text style={styles.createText}>Create an account</Text>
@@ -56,7 +57,7 @@ export default function RegisterScreen({ navigation }) {
         </View>
         <CustomTouchableOpacity
           text="Sign Up"
-          onPress={() => navigation.navigate("LoginScreen")}
+          onPress={handleSignup}
           containerStyle={{ alignSelf: "center" }}
         />
       </KeyboardAwareScrollView>
