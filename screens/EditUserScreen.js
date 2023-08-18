@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useRef, useMemo, useCallback } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { CustomHeader } from "../components/CustomHeader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { CustomTextInput } from "../components/CustomTextInput";
@@ -14,14 +14,42 @@ import { CustomTouchableOpacity } from "../components/CustomTouchableOpacity";
 import { Feather } from "@expo/vector-icons";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { CustomBottomSheetModal } from "../components/CustomBottomSheetModal";
+import { UserService } from "../infrastructure/service/user";
+import { AuthService } from "../infrastructure/service/auth";
+import { AuthContext } from "../infrastructure/context/authcontext";
+
+
 const STATUS = { Active: "Active", Passive: "Passive" };
-export default function EditUserScreen({ navigation }) {
+export default function EditUserScreen({ navigation, route }) {
+  const user = route.params?.user;
+  const {token} = useContext(AuthContext)
   const bottomSheetModalRef = useRef(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState("");
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setFullName(user.user_fullname);
+      setEmail(user.user_email);
+      setPhone(user.user_phone);
+      setStatus(user.user_status);
+    }
+    else {
+      setFullName("");
+      setEmail("");
+      setPhone("");
+      setStatus("");
+    }
+  }, [user]);
+
+  const handleAddEditPress = () => {
+    UserService.updateUser(token, user.user_id, user.full)
+  };
+
+  const handleDeletePress = () => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -111,8 +139,21 @@ export default function EditUserScreen({ navigation }) {
           <CustomTouchableOpacity
             text="Add"
             containerStyle={{ backgroundColor: "#42CD00", alignSelf: "center" }}
-            onPress={() => bottomSheetModalRef.current?.open()}
+            // onPress={() => bottomSheetModalRef.current?.open()}
+            onPress={handleAddEditPress}
           />
+          {user && (
+            <CustomTouchableOpacity
+              text="Delete"
+              containerStyle={{
+                backgroundColor: "#FF6464",
+                alignSelf: "center",
+                marginVertical: 10,
+              }}
+              // onPress={() => bottomSheetModalRef.current?.open()}
+              onPress={handleDeletePress}
+            />
+          )}
           <CustomBottomSheetModal ref={bottomSheetModalRef} />
         </KeyboardAwareScrollView>
       </BottomSheetModalProvider>

@@ -92,7 +92,14 @@ export default function BottomTabNavigation() {
             );
           },
           tabBarLabel: () => null,
+          
         }}
+        listeners={({ navigation, route }) => ({
+          tabPress: (e) => {
+           e.preventDefault()
+           navigation.navigate("EditUserScreen")
+          },
+        })}
       />
       <Tab.Screen
         name="LogoutScreen"

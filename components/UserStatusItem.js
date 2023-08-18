@@ -1,20 +1,23 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
 export const UserStatusItem = (props) => {
+  const {user_status: status ,user_fullname: userName} = props.user
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=> navigation.navigate("EditUserScreen", {user: props.user})}>
       <View style={styles.userInfoContainer}>
         <Image
           source={require("../assets/images/user.png")}
           style={styles.userImage}
         />
-        <Text style={styles.userName}>{props.userName}</Text>
+        <Text style={styles.userName}>{userName}</Text>
       </View>
-      <View style={[styles.statusContainer, {backgroundColor: props.status==="active" ? "#D2FBD4": "#FFF0F0"}]}>
-        <Text style={[styles.userStatus, {color: props.status==="active" ? "#12AA18" : "#FF6464"}]}>{props.status}</Text>
+      <View style={[styles.statusContainer, {backgroundColor: status==="Active" ? "#D2FBD4": "#FFF0F0"}]}>
+        <Text style={[styles.userStatus, {color: status==="Active" ? "#12AA18" : "#FF6464"}]}>{status}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
@@ -27,6 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom:10
   },
   userInfoContainer: {
     flexDirection: "row",

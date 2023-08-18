@@ -22,6 +22,7 @@ export default AuthProvider = (props) => {
         .then((json) => {
           console.error(json);
           if (json.response?.loginData) {
+            console.warn(token)
             setUser(json.response.loginData);
             setToken(json.response.token);
             setIsLoggedIn(true);

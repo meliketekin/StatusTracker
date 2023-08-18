@@ -16,7 +16,7 @@ export const CustomTextInput = (props) => {
 
   useEffect(() => {
     const isDropDown = props.isFocused && props.value.length > 0;
-    if (isDropDown || isFocused) {
+    if (isDropDown || (isFocused || props?.value?.length>0)) {
       handleFocus();
     }
   }, [props.isFocused, props.value, isFocused]);
@@ -90,7 +90,7 @@ export const CustomTextInput = (props) => {
       <TextInput
         value={props.value}
         style={styles.input}
-        onFocus={() =>  setIsFocused(true)}
+        onFocus={() => setIsFocused(true)}
         onBlur={handleBlur}
         onChangeText={props.onChangeText}
         secureTextEntry={props.secureTextEntry}
