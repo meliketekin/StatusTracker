@@ -10,7 +10,6 @@ const Stack = createStackNavigator();
 
 export const RootStackNavigation = () => {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
-  console.warn(isLoggedIn);
   if (isLoading) {
     return (
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>

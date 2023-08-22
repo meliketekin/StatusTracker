@@ -15,14 +15,13 @@ export default AuthProvider = (props) => {
 
     const email = await SecureStore.getItemAsync("email");
     const password = await SecureStore.getItemAsync("password");
-    console.warn(email, password);
     if (email && password) {
       AuthService.Login(JSON.parse(email), JSON.parse(password))
         .then((res) => res.json())
         .then((json) => {
           console.error(json);
           if (json.response?.loginData) {
-            console.warn(token)
+            console.(token)
             setUser(json.response.loginData);
             setToken(json.response.token);
             setIsLoggedIn(true);
@@ -36,7 +35,6 @@ export default AuthProvider = (props) => {
   const logOut = async () => {
     await SecureStore.deleteItemAsync("email");
     await SecureStore.deleteItemAsync("password");
-    console.warn("merahab");
 
     setIsLoggedIn(false);
   };

@@ -18,11 +18,10 @@ import { UserService } from "../infrastructure/service/user";
 import { AuthService } from "../infrastructure/service/auth";
 import { AuthContext } from "../infrastructure/context/authcontext";
 
-
 const STATUS = { Active: "Active", Passive: "Passive" };
 export default function EditUserScreen({ navigation, route }) {
   const user = route.params?.user;
-  const {token} = useContext(AuthContext)
+  const { token } = useContext(AuthContext);
   const bottomSheetModalRef = useRef(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,8 +35,7 @@ export default function EditUserScreen({ navigation, route }) {
       setEmail(user.user_email);
       setPhone(user.user_phone);
       setStatus(user.user_status);
-    }
-    else {
+    } else {
       setFullName("");
       setEmail("");
       setPhone("");
@@ -46,7 +44,9 @@ export default function EditUserScreen({ navigation, route }) {
   }, [user]);
 
   const handleAddEditPress = () => {
-    UserService.updateUser(token, user.user_id, user.full)
+    if (user) {
+      UserService.updateUser(token, user.user_id, user.full);
+    }
   };
 
   const handleDeletePress = () => {};

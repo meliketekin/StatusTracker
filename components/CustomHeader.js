@@ -6,11 +6,17 @@ export const CustomHeader = (props) => {
   return (
     <View style={styles.header}>
       {props.hasGoBack && (
-        <TouchableOpacity style={styles.backButton} onPress={props.onPress}>
+        <TouchableOpacity
+          testID="headerBackButton"
+          style={styles.backButton}
+          onPress={props.onPress}
+        >
           <Ionicons name="arrow-back" size={24} color="#2A2A2E" />
         </TouchableOpacity>
       )}
-      <Text style={styles.title}>{props.text}</Text>
+      <Text testID="headerTitle" style={styles.title}>
+        {props.text}
+      </Text>
     </View>
   );
 };
@@ -20,7 +26,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     height: 50,
     justifyContent: "center",
-    marginTop:30
+    marginTop: 30,
   },
   title: {
     fontFamily: "Poppins-SemiBold",
@@ -35,6 +41,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E4E4E4",
     borderRadius: 15,
-    zIndex:2
+    zIndex: 2,
   },
 });

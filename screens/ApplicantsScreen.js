@@ -16,7 +16,6 @@ export default function ApplicantsScreen() {
       .then((result) => setUsers(result.response))
       .catch((error) => console.warn("error", error));
   }, []);
-  console.warn(users);
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader hasGoBack={false} text="Users" />

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Header tests should render successfully 1`] = `
+<View
+  style={
+    {
+      "height": 50,
+      "justifyContent": "center",
+      "marginHorizontal": 20,
+      "marginTop": 30,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#2A2A2E",
+        "fontFamily": "Poppins-SemiBold",
+        "fontSize": 16,
+        "textAlign": "center",
+      }
+    }
+    testID="headerTitle"
+  />
+</View>
+`;

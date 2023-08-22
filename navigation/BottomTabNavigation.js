@@ -114,7 +114,6 @@ export default function BottomTabNavigation() {
         }}
         listeners={({ navigation, route }) => ({
           focus: (e) => {
-            console.warn("selam");
             // e.preventDefault();
             logOut();
 
