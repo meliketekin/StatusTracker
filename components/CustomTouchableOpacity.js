@@ -6,10 +6,13 @@ import { COLORS } from "../constants/colors";
 export const CustomTouchableOpacity = (props) => {
   return (
     <TouchableOpacity
+      testID="button"
       style={[styles.button, props.containerStyle]}
       onPress={props.onPress}
     >
-      <Text style={[styles.buttonText, props.textStyle]}>{props.text}</Text>
+      <Text testID="buttonText" style={[styles.buttonText, props.textStyle]}>
+        {props.text}
+      </Text>
     </TouchableOpacity>
   );
 };

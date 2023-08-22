@@ -1,9 +1,9 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
-import { CustomHeader } from "../../components/CustomHeader";
+import { CustomHeader } from "../../../components/CustomHeader";
 
 describe("Custom Header tests", () => {
-  it("should render successfully", () => {
+  it("should match with snapshot", () => {
     const header = render(<CustomHeader />);
     expect(header).toMatchSnapshot();
   });
